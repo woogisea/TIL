@@ -1,0 +1,182 @@
+/* 구글 폰트 적용 */
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    /* 웹 문서 전체 레이아웃 설정을 위해서 요소크기 쉽게 계산하기 위해 */
+    box-sizing: border-box;
+}
+
+
+a {
+    /* 링크의 밑줄을 안보이게 함 */
+    text-decoration: none;
+}
+
+#container {
+    width: 1200px;
+    /* 사이트 가운데로 위치할 수 있도록 설정 */
+    margin: auto 0px;
+}
+
+header {
+    width: 100%;
+    height: 100px;
+    background-color: #07c;
+}
+
+#logo {
+    float: left;
+    width: 250px;
+    height: 100px;
+    /* 로고의 왼쪽 패딩 */
+    padding-left: 20px;
+    /* 로고를 세로의 가운데로 위치하게 함(line-height를 전체 높이로 설정) */
+    line-height: 100px;
+}
+
+#logo h1 {
+    /* 구글 폰트 적용 */
+    font-family: 'Akaya Telivigala', cursive;
+    color: white;
+    /* 폰트 굵기 */
+    font-weight: 700;
+    /* 폰트 크기 */
+    font-size: 40px;
+}
+
+nav {
+    float: right;
+    width: 900px;
+    height: 100px;
+    padding-top: 40px;
+    
+}
+
+ul {
+    list-style: none;
+}
+
+#topMenu {
+    height: 60px;
+}
+
+/* 하위선택자와 자식선택자의 차이 , 자식선택자는 바로 밑에 있는 태그만 지정, 하위는 그 밑에 있는 모든 태그 지정  */
+#topMenu > li {
+    position: relative;
+    float: left;
+}
+
+#topMenu > li > a {
+    /* a 태그는 inline 요소이기 때문에 패딩과 마진을 줄 수 없는데 block 요소로 바꾸면 지정 가능(보통 inline-block 사용하면 둘다 가능하게 만듬 */
+    display: inline-block;
+    color: white;
+    font-weight: 600;
+    padding: 20px 60px;
+}
+
+#topMenu > li > ul > li {
+    padding: 10px 10px 10px 30px;
+}
+
+#topMenu > li > a:hover {
+    color : #000;
+}
+
+/* 상위메뉴에 마우스가 올라가면 하위메뉴가 보이게 */
+#topMenu > li:hover > ul{
+    display: block;
+}
+
+#topMenu > li > ul > li > a{
+    font-size: 14px;
+    padding: 10px;
+    color:#000;
+}
+
+#topMenu > li > ul > li > a:hover{
+    color: #f00;
+}
+
+/* 하위 메뉴를 처음에는 숨김 */
+#topMenu > li > ul {
+    position: absolute;
+    display: none;
+    /* ul만큼 배경색을 투명으로 지정 */
+    width: 160px;
+    left: 0;
+    margin: 0;
+    background-color: rgba(255,255,255,0.6);
+}
+
+
+#slideshow {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    /* 내용이 넘치면 숨김 */
+    overflow: hidden;
+}
+
+#slides {
+    position: absolute;
+}
+
+#slides > img {
+    width: 100%;
+    float: left;
+}
+
+#slides > button {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    border: none;
+    padding: 20px;
+    background-color: transparent;
+    color: #000;
+    font-weight: 800;
+    font-size: 24px;
+    opacity: 0.5;
+}
+
+#prev {
+    left: 0;
+}
+
+#next {
+    right: 0;
+}
+
+
+button:hover {
+    background-color: #222;
+    color: #fff;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+#contents {
+    width: 100%;
+    height: 300px;
+}
+#tapmenu {
+    float: left;
+    width: 800px;
+    height: 300px;
+    background-color: pink;
+}
+
+#quicklink {
+    float: right;
+    width: 400px;
+    height: 300px;
+    background-color: skyblue;
+}
+
+footer {
+    width: 100%;
+    height: 100px;
+    background-color: gray;
+}
