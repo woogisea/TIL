@@ -12,4 +12,4 @@
 
 <br>
 
->absoulte를 사용하려면 꼭 상위요소에 relative를 지정해 줘야한다.
+>absoulte를 사용하려면 꼭 상위요소에 relative를 지정해 줘야한다..
