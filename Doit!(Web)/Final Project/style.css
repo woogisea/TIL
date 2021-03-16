@@ -168,6 +168,7 @@ button:focus {
     width: 800px;
     height: 100%;
     float: left;
+    margin-top: 10px;
 }
 
 #tapmenu > input[type = "radio"] {
@@ -177,8 +178,8 @@ button:focus {
 
 #tapmenu > label {
     /* 라벨을 가로로 배치 */
-    display: inline-block;
-    margin: 0,0;
+    display: inline-block; 
+    /* margin: 0,0; */
     padding: 15px 25px;
     font-weight: 600;
     text-align: center;
@@ -186,9 +187,51 @@ button:focus {
     border: 1px solid transparent;
 }
 
+/* 라벨에 마우스 올렸을때 */
 #tapmenu > label:hover {
     color: #222;
     cursor: pointer;
+}
+
+/* 인접 하위 선택자를 이용해서 check된 라벨의 바로 밑 형제요소를 수정 */
+#tapmenu input:checked + label {
+    color: #b00;
+    border: 1px solid #ddd;
+    background-color: #eee;
+}
+
+/* notice와 gallery가 하나의 공간에 같이 들어가기 때문에 class를 하나 설정해서 같이 설정해준다. */
+.tabContent {
+    display: none;
+    padding: 20px 0 0;
+    border-top: 1px solid #ddd;
+}
+
+.tabContent h2 {
+    display: none;
+}
+
+#notice ul {
+    /* 리스트 모양 둥글게 */
+    list-style: disc;
+    /* 리스트의 왼쪽 마진을 추가해서 tapmenu 안쪽으로 들어오게 설정 */
+    margin-left: 30px;
+}
+
+#notice ul li {
+    font-size: 16px;
+    line-height: 2.5;
+}
+
+#gallery ul li {
+    /* inline 속성을 부여해서 가로로 배치 */
+    display: inline;
+}
+
+/* 형제 선택자를 이용, input 선택자도 이용 가능하지만 notice와gallery 사이의 구분이 안생기기 때문에 id를 사용한다. */
+/* tab1이 선택되면 notice, tab2가 선택되면 gallery */
+ #tab1:checked ~ #notice, #tab2:checked ~ #gallery {
+    display: block;
 }
 
 #quicklink {
