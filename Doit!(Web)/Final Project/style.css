@@ -162,10 +162,11 @@ button:focus {
 #contents {
     width: 100%;
     height: 300px;
+    margin-top: 20px;
 }
 
 #tapmenu {
-    width: 800px;
+    width: 600px;
     height: 100%;
     float: left;
     margin-top: 10px;
@@ -235,10 +236,54 @@ button:focus {
 }
 
 #quicklink {
-    width: 400px;
+    width: 600px;
     height: 100%;
+    margin-top: 15px;
+    float: right;
+}
+
+#quicklink ul {
+    padding: 0;
+    overflow: hidden;
+}
+
+#quicklink ul li {
     float: left;
-    background-color: skyblue;
+    /* 3개의 항목을 균일하게 배치 */
+    width: 33%;
+    margin: 10px 0;
+    text-align: center;
+}
+
+#quicklink ul li a span {
+    /* 가운데 정렬 */
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    /* 테두리를 둥글게 */
+    border-radius: 100%;
+    border: 1px solid #ddd;
+    /* 수직으로 중간에 */
+    line-height: 150px;
+}
+
+#quicklink ul li a p {
+    margin-top: 15px;
+    font-weight: 600;
+    color: #666;
+}
+
+/* 이미지 경로 지정 */
+#quick-icon1 {
+    background-image: url("images/icon-1.jpg");
+}
+
+#quick-icon2 {
+    background-image: url("images/icon-2.jpg");
+}
+
+#quick-icon3 {
+    background-image: url("images/icon-3.jpg");
 }
 
 footer {
