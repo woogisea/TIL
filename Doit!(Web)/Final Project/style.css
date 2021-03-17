@@ -289,5 +289,53 @@ button:focus {
 footer {
     width: 100%;
     height: 100px;
-    background-color: gray;;
+    border-top: 2px solid #222;
+}
+
+#bottomMenu {
+    width: 100%;
+    height: 20px;
+    position: relative;
+}
+
+#bottomMenu ul {
+    margin-top: 15px;
+}
+
+#bottomMenu ul li{
+    float:left;
+    padding: 5px 20px;
+    border-right: 1px solid #ddd;
+}
+
+#bottomMenu ul li:last-child {
+    border-right: none;
+}
+
+#bottomMenu ul li a, #bottomMenu ul li a:visited  {
+    font-size: 15px;
+    color:#666;
+}
+
+#sns {
+    /* sns를 오른쪽 끝으로 보내기 위해서 #buttomMenu를 기준으로 설정한다. */
+    position: absolute;
+    right: 0;
+}
+
+#sns ul li{
+    border: none;
+    padding: 5px;
+}
+
+#company {
+    /* p태그는 block요소이기 때문에 다시 순서대로 밑으로 오게 하려면 float를 clear 해준다. */
+    clear: both;
+    margin-top: 25px;
+    margin-left: 20px;
+}
+
+#company p {
+    font-size: 14px;
+    color: #aaa;
 }
