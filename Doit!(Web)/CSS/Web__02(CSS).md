@@ -5,6 +5,7 @@
 |relative|위칫값을 지정할 수 있는 점|
 |absolute|relative값을 사용한 상위 요소를 기준으로 위치를 지정|
 |fixed|위치 고정|
+|sticky|스크롤링이 되어도 원래 있었던 자리에 그대로 고정|
 
 <br>
 
@@ -12,4 +13,5 @@
 
 <br>
 
->absoulte를 사용하려면 꼭 상위요소에 relative를 지정해 줘야한다..
+>absoulte를 사용하려면 꼭 상위요소에 relative를 지정해 줘야한다.
+
