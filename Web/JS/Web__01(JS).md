@@ -1,33 +1,65 @@
-## DOM 요소에 접근하고 속성 가져오기
----
-> HTML 요소만 저장됨
-1. id 선택자로 접근
-   ```js
-   요소명.getElementById("id명")
-   ```
-2. class값으로 접근
-   ```js
-   요소명.getElementByClassName("class명")
-   ```
-3. 태그 이름으로 접근(class 또는 id를 지정하지 않은 DOM 요소)
-    ```js
-    요소명.getElementByTagName("태그명(ex/"p")")
-    ```
+## Data Types + Variable(변수)
 ---
 
+### Variables
+변수를 선언할 수 있는 키워드 : let
+
+```JS
+//Global scope (어디에서나 접근 가능)
+let globalName = "Jaewook"
+
+//Block scope(블럭 밖에서 안에 있는 변수에 접근 불가)
+{
+    let name  = "Jaewook";
+    name = hello
+}
+```
 <br>
 
->DOM 트리의 텍스트, 속성 노드까지 자유롭게 제어 + Node list로 반환
+### Constants
+선언과 동시에 할당된 이후에 변경 불가능 : const
+```JS
+const daysInWeek = 7;
+const maxNumber = 5;
+```
+<br>
 
-즉 배열의 형식으로 처리할 수 있다!
-1. 반환값이 하나 일때
-   ```js
-   요소명.querySelector(선택자)
-   ```
-2. 반환값이 여러개 일때
-   ```js
-    요소명.querySelectorAll(선택자 또는 태그)
-   ```
+### Variables types
+
+```JS
+const count = 17;
+const size = 17.1;          //값에 상관없이 type : number
+
+const infinity = 1 / 0;
+const negativeInfinity = -1 / 0;
+const nAn = 'not a number' / 2;     //특별하게 값이 정해져 있는 number
+
+const char = 'c';
+const name = 'Jaewook';
+const plusName = 'hello' + name;           //type : String
+
+console.log(`value : &{name} type : &{typeof plusName}`);   
+console.log('value: ' + name + 'type:' + typeof plusName);      // `을 사용하면 "+"를 사용하지 않아도 공백이나 문자열이 그대로 출력
+
+const canRead = true;
+const  test = 3 < 1;         //boolean
+
+let nothing = null           //null
+
+let x = undefined;          //undefined
+```
+<br>
+
+### Dynamic typing
+변수에 따라서 type이 바뀐다. <br>
+타입이 계속 바뀌기 때문에 나중에 혼란이 올 수 있기 때문에 TypeScript 활용
+```JS
+let text = 'hello';         //String
+text = 1;                   //number
+text = '7' + 5;             //String
+test = '8' / '2';           //number
+```
+
 
 
 
