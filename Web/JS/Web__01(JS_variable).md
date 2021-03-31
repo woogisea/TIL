@@ -26,7 +26,7 @@ const maxNumber = 5;
 <br>
 
 ### Variables types
-
+Primitve types
 ```JS
 const count = 17;
 const size = 17.1;          //값에 상관없이 type : number
