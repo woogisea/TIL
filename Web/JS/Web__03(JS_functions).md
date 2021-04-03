@@ -129,6 +129,7 @@ random('Jaewook', printYes, printNo);                 //Yes
 <br>
 
 ### Arrow function
+이름이 없는 함수 간단하게 호출하기.
 ```JS
 const simplePrint = function() {
     console.log('Simple print');
