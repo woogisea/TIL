@@ -56,7 +56,7 @@ ex ) insert into book(bookid, bookname, publisher) values (11, '스포츠 의학
 
 ```sql
 update 테이블 이름 set 속성이름 = 값1      ---속성이름의 값을 전부 바꿈
-update 테이블 이름 set 속성이름 = 값1 where 검색조건    ---검색조건에 맞는 값만 바꿈
+update 테이블 이름 set 속성이름 = 값1 where 검색조건    ---검색조건에 맞는 값만 바꿈, 조건 설정에 주의를 기울여서 작성 할 것.
  ```
  <br>
 
