@@ -1,11 +1,16 @@
 import React from 'react';
+import BooleanComponent from './03/BooleanComponent';
+import ChildComponent from './03/ChildComponent';
+import ChildComponent2 from './03/ChildComponent2';
+import PropsComponent from './03/PropsComponent';
+import StateExample from './03/StateExample';
+import example from './03/example';
 
 class App extends React.Component {
   render() {
+
     return (
-      <div>
-        <img src = "http://www.easyspub.co.kr/images/logo_footer.png" />
-      </div>
+     <example />
     );
   }
 }
