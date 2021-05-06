@@ -2,7 +2,7 @@ import React from 'react';
 
 function Hello({name, color}) {
     return (
-        //비구조화 할당 문법 사용 (props.를 생략할 수 있다.)
+        //비구조화 할당 문법 사용 (props를 생략할 수 있다)
          <div style ={{color}}>안녕하세요 {name}</div>         
     );
 }
