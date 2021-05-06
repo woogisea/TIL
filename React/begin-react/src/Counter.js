@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-
+//Hooks
 function Counter() {
    const [number, setNumber] = useState(0);    //상태의 기본값을 설정, setNumber로는 값을 최신 상태로 설정해준다.
 
    const onIncrease = () => {
-       setNumber(number + 1);  
+       setNumber(number + 1);                    
    }
 
    const onDecrease = () => {
