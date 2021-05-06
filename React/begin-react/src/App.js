@@ -3,6 +3,7 @@ import Hello from './Hello';
 import Wrapper from './Wrapper';
 import Counter from './Counter';
 import './App.css';
+import InputSample from './InputSample';
 
 
 function App() {
@@ -36,6 +37,8 @@ function App() {
       </div>
       <div>
         <Counter />
+        <br />
+        <InputSample />
         <br />
       </div>
     </>    //두개 이상의 태그는 꼭 하나의 태그로 감싸주어여 한다. 불필요한 div로 감싸지 않기 위해서 <>(Fragment)를 사용하기도 한다.
