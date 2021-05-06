@@ -1,6 +1,6 @@
 import React from 'react';
 
-//컴포넌트 태그 사이에 넣은 값을 조회
+//컴포넌트 태그 사이에 넣은 값을 조회한다.
 //App 에서 Wrapper 안에 Hello 두개가 들어가 있다.
 function Wrapper({children}) {
     const style = {
