@@ -9,6 +9,8 @@ import CreateUser from './CreateUser';
 
 
 function App() {
+
+
   const name = 'react';
   const style = {
     backgroundColor : 'black' ,
@@ -21,22 +23,28 @@ function App() {
     border : '5px solid blue',
   };
 
-  const users = [{
+  
+
+  const [users, setUsers] = useState([
+    {
       id : 1,
       username : 'jaewook',
       email : 'test1@gmail.com'
     },
+
     {
       id : 2,
       username : 'jaewook2',
       email : 'test2@gmail.com'
     },
+
     {
       id : 3,
       username : 'jaewook3',
       email : 'test3@gmail.com'
-      }
-    ];
+    }
+  ]);
+
 
   const [inputs, setInputs] = useState({
     username : ' ',
@@ -54,6 +62,15 @@ function App() {
 
   const nextId = useRef(4);        //useRef에 파라미터를 넣어주면 current의 기본값이 된다.
   const onCreate = () => {
+    const user = {
+      id : nextId.current,
+      username,
+      email
+    };
+
+    // 배열에 항목 추가하기
+    setUsers(users.concat(user));
+    // setUsers([...users, user]);
 
     setInputs({
       username : ' ',
