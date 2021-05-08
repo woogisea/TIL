@@ -82,11 +82,13 @@ function App() {
     nextId.current += 1;
   };
 
+  //배열의 항목 삭제
   const onRemove = id => {
     //userid가 일치하지 않는 것들만 추출해서 새로운 배열을 만든다.
     setUsers(users.filter(user => user.id !== id));
   };
 
+  //배열의 항목 수정
   const onToggle = id => {
     setUsers(
       users.map(user => user.id === id ? {...user, active: !user.active} : user)
