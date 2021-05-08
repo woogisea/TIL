@@ -29,19 +29,22 @@ function App() {
     {
       id : 1,
       username : 'jaewook',
-      email : 'test1@gmail.com'
+      email : 'test1@gmail.com',
+      active : true
     },
 
     {
       id : 2,
       username : 'jaewook2',
-      email : 'test2@gmail.com'
+      email : 'test2@gmail.com',
+      active : false
     },
 
     {
       id : 3,
       username : 'jaewook3',
-      email : 'test3@gmail.com'
+      email : 'test3@gmail.com',
+      active : false
     }
   ]);
 
@@ -79,6 +82,18 @@ function App() {
     nextId.current += 1;
   };
 
+  const onRemove = id => {
+    //userid가 일치하지 않는 것들만 추출해서 새로운 배열을 만든다.
+    setUsers(users.filter(user => user.id !== id));
+  };
+
+  const onToggle = id => {
+    setUsers(
+      users.map(user => user.id === id ? {...user, active: !user.active} : user)
+    );
+  };
+
+
 
 
   return (
@@ -103,7 +118,7 @@ function App() {
         <InputSample />
         <br />
         <CreateUser username = {username} email = {email} onCreate = {onCreate} onChange = {onChange} />
-        <UserList users = {users} />
+        <UserList users = {users}  onRemove = {onRemove} onToggle = {onToggle} />
       </div>
     </>    //두개 이상의 태그는 꼭 하나의 태그로 감싸주어여 한다. 불필요한 div로 감싸지 않기 위해서 <>(Fragment)를 사용하기도 한다.
   );
