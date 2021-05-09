@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useMemo, useCallback} from 'react';
 import Hello from './Hello';
 import Wrapper from './Wrapper';
 import Counter from './Counter';
@@ -55,46 +55,65 @@ function App() {
   });
 
   const {username, email} = inputs;
-  const onChange = e => {
-    const {value, name} = e.target;
-    setInputs({
-      ...inputs,
-      [name] : value
-    });
-  };
+  const onChange = useCallback(
+    e => {
+      const {value, name} = e.target;
+      setInputs({
+        ...inputs,
+        [name] : value
+      });
+    },
+    [inputs]
+  );
 
   const nextId = useRef(4);        //useRef에 파라미터를 넣어주면 current의 기본값이 된다.
-  const onCreate = () => {
-    const user = {
-      id : nextId.current,
-      username,
-      email
-    };
+  const onCreate = useCallback(
+      () => {
+      const user = {
+        id : nextId.current,
+        username,
+        email
+      };
 
-    // 배열에 항목 추가하기
-    setUsers(users.concat(user));
-    // setUsers([...users, user]);
+      // 배열에 항목 추가하기
+      setUsers(users.concat(user));
+      // setUsers([...users, user]);
 
-    setInputs({
-      username : ' ',
-      email : ' ',
-    });
-    nextId.current += 1;
-  };
+      setInputs({
+        username : ' ',
+        email : ' ',
+      });
+      nextId.current += 1;
+    },
+    [users, username, email]
+  );
 
   //배열의 항목 삭제
-  const onRemove = id => {
+  const onRemove = useCallback(
+    id => {
     //userid가 일치하지 않는 것들만 추출해서 새로운 배열을 만든다.
     setUsers(users.filter(user => user.id !== id));
-  };
+    },
+    [users]
+  );
 
   //배열의 항목 수정
-  const onToggle = id => {
-    setUsers(
-      users.map(user => user.id === id ? {...user, active: !user.active} : user)
-    );
-  };
+  const onToggle = useCallback(
+    id => {
+      setUsers(
+        users.map(user => user.id === id ? {...user, active: !user.active} : user)
+      );
+    },
+    [users]
+  );
 
+  const countActiveUsers = () => {
+    console.log('count active user :');
+    return users.filter(user => user.active).length;
+  }
+
+  //useMemo(memorize) 활용, 이전 계산 한 값을 재활용 할 수 있다.
+  const count = useMemo(() => countActiveUsers(users), [users]);
 
 
 
@@ -121,6 +140,7 @@ function App() {
         <br />
         <CreateUser username = {username} email = {email} onCreate = {onCreate} onChange = {onChange} />
         <UserList users = {users}  onRemove = {onRemove} onToggle = {onToggle} />
+        <div>활성사용자 수 : {count}</div>
       </div>
     </>    //두개 이상의 태그는 꼭 하나의 태그로 감싸주어여 한다. 불필요한 div로 감싸지 않기 위해서 <>(Fragment)를 사용하기도 한다.
   );
