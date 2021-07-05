@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 //클래스형 컴포넌트
-//state는 컴포넌트 내부에서 바뀔 수 있는 값
+//state는 컴포넌트 내부에서 바뀔 수 있는 값이다.
 export default class Counter extends Component {
     //컴포넌트 생성자
     // constructor(props) {
