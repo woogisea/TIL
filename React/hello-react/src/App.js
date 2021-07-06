@@ -3,6 +3,8 @@ import './App.css';
 import Mycomponent from './Mycomponent';
 import Counter from './Counter';
 import Say from './Say';
+import EventPractice from './EventPractice';
+import SEventPractice from './SEventPractice';
 
 //함수형 컴포넌트
 const App = () => {
@@ -36,6 +38,10 @@ const App = () => {
 
       <Counter />
       <Say />
+
+      <EventPractice />
+
+      <SEventPractice />
     </>
   )
 }
