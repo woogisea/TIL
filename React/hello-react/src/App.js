@@ -5,6 +5,8 @@ import Counter from './Counter';
 import Say from './Say';
 import EventPractice from './EventPractice';
 import SEventPractice from './SEventPractice';
+import ValidationSample from './ValidationSample';
+import ScrollBox from './ScrollBox';
 
 //함수형 컴포넌트
 const App = () => {
@@ -42,6 +44,13 @@ const App = () => {
       <EventPractice />
 
       <SEventPractice />
+
+      <ValidationSample /> 
+
+      <ScrollBox ref={ref => this.scrollBox = ref} />
+      <button onClick={() => this.scrollBox.scrollToBottom()}>
+        맨 밑으로
+      </button>
     </>
   )
 }
