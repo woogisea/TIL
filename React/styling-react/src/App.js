@@ -1,6 +1,7 @@
 import React from 'react';
 import CSSModule from './CSSModule';
 import SassComponent from './SassComponent';
+import StyledComponent from './StyledComponent';
 
 const App = () => {
   return (
@@ -8,6 +9,8 @@ const App = () => {
       <SassComponent />
       <br />
       <CSSModule />
+      <br />
+      <StyledComponent />
     </div>
   );
 };
