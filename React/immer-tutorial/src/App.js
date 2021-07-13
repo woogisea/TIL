@@ -1,6 +1,7 @@
 import React, {useState, useCallback, useRef} from 'react';
 import produce from 'immer';
 
+//immer 사용해서 불변성 유지
 const App = () => {
   const [form, setform] = useState({
     name : ' ',
