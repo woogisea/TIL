@@ -15,7 +15,7 @@ const TodoList = () => {
     return (
        <TodoListBox>
            {state.map (todo => (
-               <TodoListItem key = {todo.id}>{todo.text}</TodoListItem>
+               <TodoListItem key = {todo.id} text = {todo.text} id = {todo.id} checked = {todo.checked}></TodoListItem>
            ))}
        </TodoListBox>
     );

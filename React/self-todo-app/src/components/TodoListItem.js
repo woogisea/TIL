@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import {MdCheckBoxOutlineBlank, MdDeleteForever,MdCheckBox} from 'react-icons/md';
-import { useTodoStateContext , useTodoDispatchContext} from '../contexts/Item';
+import { useTodoDispatchContext} from '../contexts/Item';
 
 const TodoListItemBox = styled.div`
     box-sizing: border-box;
@@ -44,12 +44,9 @@ const TodoListItemBox = styled.div`
     }
 `;
 
-const TodoListItem = () => {
-    
-    const state = useTodoStateContext();
+const TodoListItem = ({ text, id, checked }) => {
     const dispatch = useTodoDispatchContext();
 
-    const {checked, text, id} = state;
     
     const onToggle = () => dispatch({
         type : 'onToggle',
@@ -69,7 +66,7 @@ const TodoListItem = () => {
                 <span>{text}</span>
             </div>
             <div className="delete">
-                <MdDeleteForever onClick = {onRemove}/>
+                <MdDeleteForever onClick = {onRemove} />
             </div>
         </TodoListItemBox>
     );

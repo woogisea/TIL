@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { MdAdd } from 'react-icons/md';
+import { useTodoDispatchContext, useTodoNextIdContext } from '../contexts/Item';
 
 const TodoInsertBox = styled.div`
     display: flex;
@@ -24,17 +25,29 @@ const TodoInsertBox = styled.div`
     }
 `;
 
-const TodoInsert = ({ onInsert }) => {
+const TodoInsert = () => {
+    const dispatch = useTodoDispatchContext();
+    const nextId = useTodoNextIdContext();
+
     const [value, setValue] = useState('');
 
     const onChange = e => {
         setValue(e.target.value);
     }
 
+    const onInsert = () => dispatch({
+        type : 'onInsert',
+        user : {
+            id : nextId.current,
+            text : value,
+            checked : false
+        }
+    });
+
     return (
         <TodoInsertBox>
             <input type="text" value = {value} placeholder = "할 일을 입력하세요" onChange = {onChange}/>
-            <button onClick = {() => onInsert(value)}> <MdAdd /></button>
+            <button onClick = {onInsert}> <MdAdd /></button>
         </TodoInsertBox>
     );
 };
