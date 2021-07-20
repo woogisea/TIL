@@ -1,45 +1,61 @@
-import React, {useState,createContext } from 'react';
+import React, { createContext, useReducer, useRef, useContext} from 'react';
 
-const todos = createContext({
-    state : [
+const initialState = [
         {
-            id : 1,
-            text : '안녕하세요',
-            checked : true
+          id : 1,
+          text : '안녕하세요',
+          checked : true
         },
+  
         {
-            id : 2,
-            text : '안녕하세요2',
-            checked : false
-        }
-    ],
+          id : 2,
+          text : '안녕하세요2',
+          checked : false
+      }
+];
+  
+  function reducer(state, action) {
+    switch (action.type) {
+      case 'onInsert':
+        return state.concat(action.user);
+      
+      case 'onToggle' :
+        return state.map(todo => (todo.id === action.id ? {...todo, checked : !todo.checked} : todo));
 
-    actions : {
-        onToggle : id => {}
+      case 'onRemove' :
+        return state.filter(todo => todo.id !== action.id);
+
+      default:
+        return state;
     }
-});
+  }
 
-const TodoProvider = ({ children }) => {
-    const [todos,setTodos] = useState('');
+  const TodoStateContext = createContext();
+  const TodoDispatchContext = createContext();
+  const TodoNextIdContext = createContext();
 
-    const value = {
-        state : todos,
-        actions : {
-            onToggle : id => {
-                setTodos(
-                    todos.map(todo => todo.id === id ? { ...todo, checked : !todo.checked} : todo)
-                )
-            }
-        }
-    }
+  export function TodoProvider ({ children }) {
+      const [state, dispatch] = useReducer(reducer, initialState);
+      const nextId = useRef(3);
+      return(
+        <TodoStateContext.Provider value = {state}>
+            <TodoDispatchContext.Provider value = {dispatch}>
+                <TodoNextIdContext.Provider value = {nextId}>
+                    {children}
+                </TodoNextIdContext.Provider>
+            </TodoDispatchContext.Provider>
+        </TodoStateContext.Provider>
+      );
+  }
 
-    return (
-        <todos.Provider value = {value}>{children}</todos.Provider>
-    );
+  export function useTodoStateContext(){
+      return useContext(TodoStateContext);
+  }
+
+  export function useTodoDispatchContext(){
+      return useContext(TodoDispatchContext);
+  }
+
+  export function useTodoNextIdContext(){
+    return useContext(TodoNextIdContext);
 }
-
-const {Consumer : TodoConsumer} = todos;
-
-export {TodoProvider, TodoConsumer};
-
-export default todos;

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import TodoListItem from './TodoListItem';
+import {useTodoStateContext} from '../contexts/Item';
 
 
 const TodoListBox = styled.div`
@@ -8,11 +9,13 @@ const TodoListBox = styled.div`
     height: 100%;
 `;
 
-const TodoList = ({ todos, onToggle, onRemove }) => {
+const TodoList = () => {
+    const state = useTodoStateContext();
+    console.log(state);
     return (
        <TodoListBox>
-           {todos.map (todo => (
-               <TodoListItem todo = {todo} onToggle = {onToggle} onRemove = {onRemove} key = {todo.id}>{todo.text}</TodoListItem>
+           {state.map (todo => (
+               <TodoListItem key = {todo.id}>{todo.text}</TodoListItem>
            ))}
        </TodoListBox>
     );
