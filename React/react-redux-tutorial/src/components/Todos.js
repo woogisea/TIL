@@ -1,30 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
+import TodoItem from './TodoItem';
 
-const TodoItem = ({ todo, onToggle, onRemove}) => {
-    return (
-        <div>
-            <input type="checkbox"/>
-            <span>예제 텍스트</span>
-            <button>삭제</button>
-        </div>
-    );
-};
+const Todos = ( {todos, onInsert, onToggle, onDelete}) => {
+    const [value, setValue] = useState('');
 
-const Todos = ({ input, todos, onChangeInput, onInsert, onToggle, onRemove}) => {
-    const onSubmit = e => {
-        e.preventDefault();
+    const onChange = e => {
+        setValue(e.target.value);
     };
     return (
         <div>
-           <form onSubmit = {onSubmit}>
-               <input type="text"/>
-               <button type = "submit">등록</button>
-               <TodoItem />
-               <TodoItem />
-               <TodoItem />
-               <TodoItem />
-               <TodoItem />
-           </form>
+            <input type="text" value  = {value} onChange = {onChange}/>
+            <button onClick = {onInsert( {value} )}>등록</button>
+
+            {todos.map(todo => (
+                <TodoItem todo = {todo} key = {todo.id} onDelete = {onDelete} onToggle = {onToggle} />
+            ))}
         </div>
     );
 };
