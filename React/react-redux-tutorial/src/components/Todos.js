@@ -1,20 +1,29 @@
-import React, {useState} from 'react';
+import React from 'react';
 import TodoItem from './TodoItem';
 
-const Todos = ( {todos, onInsert, onToggle, onDelete}) => {
-    const [value, setValue] = useState('');
+const Todos = ( {input, todos, onchangeInput, onInsert, onToggle, onDelete}) => {
+
+    const onSubmit = e => {
+        e.preventDefault();
+        onInsert(input);
+        onchangeInput('');
+    };
 
     const onChange = e => {
-        setValue(e.target.value);
+        onchangeInput(e.target.value)
     };
+
     return (
         <div>
-            <input type="text" value  = {value} onChange = {onChange}/>
-            <button onClick = {onInsert( {value} )}>등록</button>
-
-            {todos.map(todo => (
-                <TodoItem todo = {todo} key = {todo.id} onDelete = {onDelete} onToggle = {onToggle} />
-            ))}
+            <form onSubmit = {onSubmit}>
+                <input type = "text" value = {input} onChange = {onChange} />
+                <button type = "submit">등록</button>
+            </form>
+            <div>
+                {todos.map(todo => (
+                    <TodoItem todo = {todo} key = {todo.id} onDelete = {onDelete} onToggle = {onToggle} />
+                ))}
+            </div>
         </div>
     );
 };

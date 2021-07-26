@@ -1,6 +1,14 @@
+const CHANGE_INPUT = 'todo/CHANGE_INPUT';
 const INSERT = 'todo/INSERT';
 const TOGGLE = 'todo/TOGGLE';
 const DELETE = 'todo/DELETE';
+
+export const changeInput = input => (
+    {
+        type : CHANGE_INPUT,
+        input
+    }
+);
 
 let nextId = 3;
 export const insert = text => (
@@ -28,22 +36,30 @@ export const Tdelete = id => (
     }
 );
 
-const todos = [
-    {
-        id : 1,
-        text : '안녕하세요',
-        checked : true
-    },
+const initialState = {
+    input : ' ',
+    todos :[
+        {
+            id : 1,
+            text : '안녕하세요',
+            checked : true
+        },
 
-    {
-        id : 2,
-        text : '안녕하세요2',
-        checked : false
-    }
-];
+        {   
+            id : 2,
+            text : '안녕하세요2',
+            checked : false
+        }
+    ]
+};
 
-function todo(state = todos, action) {
+function todo(state = initialState, action) {
     switch (action.type) {
+        case CHANGE_INPUT:
+            return{
+                ...state,
+                input : action.input
+            };
         case INSERT:
             return{
                 ...state,
