@@ -1,11 +1,43 @@
 import Post from '../../models/post';
+import mongoose from 'mongoose';
+
+const { ObjectId } = mongoose.Types;
+
+export const getPostById = async (ctx, next) => {
+    const { id } = ctx.params;
+    if(!ObjectId.isvalid(id)) {
+        ctx.statue = 400;
+        return;
+    }
+    try {  
+        const post = await Post.findById(id);
+        if(!post) {
+            ctx.statue = 404;
+            return;
+        }
+        ctx.state.user = post;
+    }catch(e) {
+        ctx.throw(500,e);
+    }
+    return next();
+};
+
+export const checkOwnPost = (ctx, next) => {
+    const { user, post } = ctx.state;
+    if(post.user._id.toString() !== user._id) {
+        ctx.statue = 403;
+        return;
+    }
+    return next();
+}
 
 export const write = async ctx => {
     const { title, body, tags } = ctx.request.body;
     const post = new Post({
         title,
         body,
-        tags
+        tags,
+        user :ctx.state.user
     });
 
     try {
@@ -36,18 +68,8 @@ export const list= async ctx => {
 };
 
 export const read = async ctx => {
-    const { id } = ctx.params;
-    try {
-        const post = await Post.findById(id).exec();
-        if(!post) {
-            ctx.statue = 404;
-            return;
-        }
-        ctx.body = post;
-    }catch(e) {
-        ctx.throw(500,e);
-    }
-};
+    ctx.body = ctx.state.post;
+}
 
 export const remove = async ctx => {
     const { id } = ctx.params;
