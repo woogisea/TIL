@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# Redux
+  - 프레젠테이셔널 컴포넌트 : props를 받아서 UI를 보여주기만 함 <br>
+  - 컨테이너 컴포넌트 : 리덕스와 연동되어 있는 컴포넌트, 리덕스로 부터 상태를 받아오거나          리덕스 스토어에 액션을 디스패치
+  - createStore를 통해 스토어를 만들 때는 리듀서를 하나만 사용해야 한다.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br>
 
-## Available Scripts
+```js
+//액션 타입
+const INCREASE = 'counter/INCREASE';
+const DECREASE = 'counter/DECREASE';
 
-In the project directory, you can run:
+//액션 생성 함수
+export const increase = () => ({type : INCREASE});
+export const decrease = () => ({type : DECREASE});
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+//초기 상태와 리듀서 함수
+const initialState = {
+    number : 0
+};
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+function counter(state = initialState, action) {
+    switch(action.type) {
+        case INCREASE : 
+            return{
+                number : state.number + 1
+            };
+        case DECREASE :
+            return {
+                number : state.number - 1
+            };
+    }
+}
 
-### `npm test`
+//redux-actions를 사용하는 경우
+export const increase = createAction(INCREASE);
+export const decrease = createAction(DECREASE);
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const counter = handleActions(
+    {
+        [INCREASE] : (state,aciton) => ({number : state.number + 1}),
+        [DECREASE] : (state,action) => ({number : state.number - 1})
+    },
+    initialState,
+)
 
-### `npm run build`
+//액션 함수에 파라미터를 받는 함수가 있다면 리듀서 함수에서 payload 사용(action.payload)
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```js
+    //기존에 만들었던 리듀서를 하나로 합쳐주는 과정이 필요하다.
+    import { combineReducers } from 'redux';
+    import counter from './counter';
+    import todos from './todos';
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    const rootReducer = combineReducer(
+        {
+            counter,
+            todos
+        }
+    );
 
-### `npm run eject`
+    export default rootReducer;
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 컨테이너 컴포넌트
+위에서 만든 리덕스 스토어에 접근해서 상태를 받아오고 액션를 디스패치 해준다.
+```js
+    //첫번째 인자는 리덕스 스토어 안에 있는 상태를 props로
+    //두번째 인자는 액션 생성 함수를 props로
+    connect(mapStateToProps, mapDispatchToProps)(연동할 컴포넌트)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Hooks 사용해서 컨테이너 컴포넌트 만들기
+```js
+    //mapStateToProps와 형태는 같고 더 간단하다
+    const number = useSelector(state => state.counter.number);
+    const dispatch = useDispatch();
 
-## Learn More
+    //간단한 useDispatch 사용
+    const onIncrease = () => dispatch(increase());
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
