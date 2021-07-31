@@ -6,6 +6,7 @@ const DECREASE = 'conter/DECREASE';
 export const increase = createAction(INCREASE);
 export const decrease = createAction(DECREASE);
 
+//redux-thunk는 액션 생성 함수에서 일반 액션 객체가 아닌 함수를 반환
 export const increaseAsync = () => dispatch => {
     setTimeout(() => {
         dispatch(increase());

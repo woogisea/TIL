@@ -10,6 +10,7 @@ import { createLogger } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 
 const logger = createLogger();
+//redux-thunk의 사용
 const store = createStore(rootReducer, applyMiddleware(logger, ReduxThunk));
 
 ReactDOM.render(
