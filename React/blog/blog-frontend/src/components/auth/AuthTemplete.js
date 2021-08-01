@@ -3,13 +3,17 @@ import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
 
-const AuthTempleteBlock = styled.div`
-    background: ${palette.gray[2]};
+//회원가입, 로그인 레이아웃
+
+const AuthTempleteBox = styled.div`
     position: absolute;
     left: 0;
-    top: 0;
     right: 0;
+    top: 0;
     bottom: 0;
+    background-color: ${palette.gray[2]};
+
+    //내부를 중앙으로 정렬
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,30 +21,30 @@ const AuthTempleteBlock = styled.div`
 `;
 
 const WhiteBox = styled.div`
+    background-color: white;
     width: 360px;
-    background: white;
-    box-shadow : 0 0 8px rgba(0,0,0,0.025);
+    box-shadow: 0 0 8px rgba(0,0,0,0.025);
     padding: 2rem;
     border-radius: 2px;
 
     .logo-area {
-       padding-bottom: 2rem;
-       text-align: center;
-       font-weight: bold;
-       letter-spacing: 2px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        padding-bottom: 2rem;
+        text-align: center;
     }
 `;
-
 const AuthTemplete = ({ children }) => {
     return (
-        <AuthTempleteBlock>
+        <AuthTempleteBox>
             <WhiteBox>
                 <div className="logo-area">
-                    <Link to = "/">REACTORS</Link>
+                    {/*링크를 통해서 처음(PostList)으로 돌아갈 수 있게*/}
+                    <Link to = '/'>Reactors</Link>
                 </div>
                 {children}
             </WhiteBox>
-        </AuthTempleteBlock>
+        </AuthTempleteBox>
     );
 };
 
