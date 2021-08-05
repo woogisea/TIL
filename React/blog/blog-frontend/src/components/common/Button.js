@@ -1,10 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
+import { Link } from 'react-router-dom';
 
 //공통된 버튼 스타일
 //다양한 곳에서 스타일을 유지하면서 재사용이 가능하다.
-const StyledButton = styled.button`
+const buttonStyle = css`
     background-color: ${palette.gray[8]};
     &:hover {
         background-color: ${palette.gray[6]};
@@ -39,6 +40,20 @@ const StyledButton = styled.button`
     `}
 `;
 
-const Button = props => <StyledButton {...props} />
+const StyledButton = styled.button`
+    ${buttonStyle}
+`;
+
+const StyledLink = styled(Link)`
+    ${buttonStyle}
+`;
+
+const Button = props => {
+    return props.to ? (
+        <StyledLink {...props} cyan = {props.cyan ? 1 : 0} />
+    ) : (
+        <StyledButton {...props} />
+    )
+}
 
 export default Button;

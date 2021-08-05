@@ -1,10 +1,13 @@
 import React from 'react';
+import PostViewer from '../components/post/PostViewer';
+import HeaderContainer from '../container/common/HeaderContainer';
 
 const PostListPage = () => {
     return (
-        <div>
-            포스트 리스트 
-        </div>
+        <>
+            <HeaderContainer />
+            {/* <PostViewer /> */}
+        </>
     );
 };
 
