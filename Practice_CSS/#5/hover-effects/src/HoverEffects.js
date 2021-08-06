@@ -15,23 +15,61 @@ const HoverButton = styled.button`
     padding: 0.5rem;
     border: 1px solid #3498db;
     background : none;
-    color: white;
     font-weight: bold;
-    /* transition: 0.8s;
+    transition: 0.8s;
     position: relative;
-    overflow: hidden; */
+    overflow: hidden;
 
+    &.btn1, &.btn2 {
+        color: #3498db;
 
-    /* &::before {
+        &:hover {
+            color: white;
+        }
+    }
+
+    &.btn3, &.btn4 {
+        color: white;
+
+        &:hover {
+            color: #3498db;
+        }
+    }
+
+    &::before {
         content: "";
         position: absolute;
+        background: #3498db;
+        width: 100%;
         left: 0;
         height: 0%;
-        width: 100%;
-        background-color: #3498db;
         z-index: -1;
         transition: 0.8s;
-    } */
+    }
+
+
+    &.btn1::before, &.btn3::before {
+        top: 0;
+        border-radius: 0 0 50% 50%;
+    }
+
+    &.btn2::before, &.btn4::before {
+        bottom: 0;
+        border-radius: 50% 50% 0 0;
+    }
+    
+    &.btn3::before, &.btn4::before {
+        height: 180%; 
+    }
+    
+
+    &.btn1:hover::before, &.btn2:hover:before {
+        height: 180%;
+    }
+
+    &.btn3:hover::before, &.btn4:hover:before {
+        height: 0%;
+    }
 
 
 `;
