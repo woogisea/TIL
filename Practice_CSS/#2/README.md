@@ -16,5 +16,6 @@ undeline도 사용가능 하지만 세밀한 위치 조정이 어려워 border-b
 
 <br>
 
-![screeen](https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/img%232.png)
+
+<img src = "https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/img%232.png" width = "500px">
 
