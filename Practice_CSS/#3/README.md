@@ -12,5 +12,4 @@ flex-grow : 1 과 같으며 input이 SearchBoxWrapper 안에 버튼을 제외한
 <br>
 
 
-![screeen](https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/%233.gif)
-
+<img src = "https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/%233.gif" width = "500px">
