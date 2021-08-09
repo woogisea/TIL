@@ -24,4 +24,4 @@ input이 focus 되었을 때 기본적으로 적용되는 테두리 제거 <br>
 ex) margin : 20px auto <br>
 위아래 20, 좌우는 균등하게
 
-![screen](https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/img%231.png)
+<img src = "https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/img%231.png" width = "500px" >
