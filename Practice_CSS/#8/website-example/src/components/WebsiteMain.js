@@ -9,7 +9,6 @@ import twitter from '../img/twitter.png';
 import thumb1 from '../img/thumb1.png';
 import thumb2 from '../img/thumb2.png';
 import thumb3 from '../img/thumb3.png';
-import WebsiteBackground from './WebsiteBackground';
 
 const WebsiteMainBlock = styled.div`
     margin: 0 auto;
