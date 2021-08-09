@@ -15,6 +15,5 @@
 
 <br>
 
-
-![screeen](https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/%236.gif)
+<img src = "https://raw.githubusercontent.com/Dev-jwJeong/TIL/master/Practice_CSS/img/%236.gif" width = "500px">
 
