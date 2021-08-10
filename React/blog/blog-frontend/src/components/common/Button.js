@@ -1,28 +1,24 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 import palette from '../../lib/styles/palette';
-import { Link } from 'react-router-dom';
 
-//공통된 버튼 스타일
-//다양한 곳에서 스타일을 유지하면서 재사용이 가능하다.
-const buttonStyle = css`
-    background-color: ${palette.gray[8]};
+const StyledButton = styled.button`
+    color: white;
+    background: ${palette.gray[8]};
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 0.25rem 1rem;
+    outline: none;
+    cursor: pointer;
+
     &:hover {
-        background-color: ${palette.gray[6]};
+        background: ${palette.gray[6]};
     }
 
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 1rem;
-    padding: 0.25rem 1rem;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;   
-
-    //조건부 스타일링
-    ${props =>
-        props.fullWidth && 
+    ${props => 
+        props.fullWidth &&
         css`
             padding-top: 0.75rem;
             padding-bottom: 0.75rem;
@@ -33,27 +29,12 @@ const buttonStyle = css`
     ${props => 
         props.cyan &&
         css`
-            background-color: ${palette.cyan[5]};
+            background: ${palette.cyan[5]};
             &:hover {
-                background-color: ${palette.cyan[4]};
+                background: ${palette.cyan[4]};
             }
     `}
 `;
-
-const StyledButton = styled.button`
-    ${buttonStyle}
-`;
-
-const StyledLink = styled(Link)`
-    ${buttonStyle}
-`;
-
-const Button = props => {
-    return props.to ? (
-        <StyledLink {...props} cyan = {props.cyan ? 1 : 0} />
-    ) : (
-        <StyledButton {...props} />
-    )
-}
+const Button = props => <StyledButton {...props} />
 
 export default Button;
