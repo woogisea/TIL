@@ -1,4 +1,5 @@
 # Summary
 
 ## #1
-- [~redux](https://github.com/Dev-jwJeong/TIL/blob/master/React/blog/summary/%231chap.md)
+- [~redux](React/blog/summary/#1/~redux.md)
+- [~redux-saga](React/blog/summary/#1/~redux-saga.md)
