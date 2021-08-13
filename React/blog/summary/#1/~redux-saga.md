@@ -15,14 +15,26 @@
 
 <br>
 
->### props 전달
-- registerPage 와 loginPage에서 각각의 type을 자식 컴포넌트로 전달
-- 자식 컴포넌트에서는 props에 맞는 form을 변경
-- 하나의 form으로 register,login 구현
-
+>### createRequestSaga 유틸 함수
+- login,register API의 중복되는 코드를 함수로 만듬.
+- login(성공,실패), register(성공,실패)에 관한 부분만 처리해 주면 된다.
 <br>
 
->### redux 상태관리
-- form의 input값 관리, 초기값 관리
-- 어떤 form 인지(login, register), 어떤 값을 바꿀건지(username, password, passwordConfirm), 실제바꾸려는 값
-- 각 input의 name으로 key 구분
+>### 회원가입, 로그인
+- username, password를 파라미터로 넣어서 액션을 디스패치
+- 결과는 auth,authError로 확인
+
+>### check -> user
+- check 후 성공 하면 user에 로그인 정보를 저장
+- 로그인 상태를 user에서 참조
+
+>### localStorage
+- 회원가입 및 로그인을 하면 사용자 정보(user)를 localStorage에 저장
+- 새로고침해도 로그인 상태를 유지하기 위해서 리액트 앱이 브라우저에서 처음 랜더링 될 때 localStorage안에서 값을 불러와 리덕스 스토어안에 넣도록 구현
+
+
+>### 로그아웃
+  - localStorage에서 user 삭제
+
+
+
