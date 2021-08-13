@@ -1,11 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AuthForm from '../components/auth/AuthForm';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeField, initializeForm } from '../modules/auth';
+import { changeField, initializeForm, login } from '../modules/auth';
+import { check } from '../modules/user';
+import { withRouter } from 'react-router-dom';
 
-const LoginForm = () => {
-    const { form } = useSelector(({auth}) =>({
-        form : auth.login
+const LoginForm = ({history}) => {
+
+    const [error, setError] = useState(null);
+    const { form, auth, authError, user } = useSelector(({auth, user}) =>({
+        form : auth.login,
+        auth : auth.auth,
+        authError : auth.authError,
+        user : user.user
     }))
     const dispatch = useDispatch();
 
@@ -24,6 +31,8 @@ const LoginForm = () => {
 
     const onSubmit = e => {
         e.preventDefault();
+        const { username, password } = form;
+        dispatch(login({username, password}));
     }
 
     useEffect(() => {
@@ -32,10 +41,34 @@ const LoginForm = () => {
         )
     }, [dispatch])
 
+    useEffect(() => {
+        if(auth) {
+            console.log('로그인 성공');
+            dispatch(check());
+        }
+        
+        if(authError) {
+            console.log('오류 발생');
+            console.log(authError);
+            setError('로그인 실패')
+            return;
+        }
+    }, [auth, authError, dispatch]);
+
+    useEffect(() => {
+        if(user) {
+            history.push('/');
+            try {
+                localStorage.setItem('user', JSON.stringify(user));
+            }catch(e) {
+                console.log('localStorage is not working');
+            }
+        }
+    }, [user, history]);
 
     return (
-        <AuthForm form = {form} type = "login" onChange = {onChange} onSubmit = {onSubmit} />
+        <AuthForm form = {form} type = 'login' onChange = {onChange} onSubmit = {onSubmit} error = {error} />
     );
 };
 
-export default LoginForm;
+export default withRouter(LoginForm);

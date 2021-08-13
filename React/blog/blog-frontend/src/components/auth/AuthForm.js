@@ -40,12 +40,19 @@ const Footer = styled.div`
         }
     }
 `;
+
+const ErrorMessage = styled.div`
+    color: red;
+    text-align : center;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+`;
 const textMap = {
     login : '로그인',
     register : '회원가입'
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
     const text = textMap[type];
     return (
         <AuthFormBlock>
@@ -56,6 +63,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
                 {type === 'register' && (
                     <StyledInput type = "password" name = "passwordConfirm" placeholder = "비밀번호 확인" value = {form.passwordConfirm} onChange = {onChange}/>
                 )}
+                {error && <ErrorMessage>{error}</ErrorMessage>}
                 <Button fullWidth cyan style = {{marginTop : '1rem'}}>{text}</Button>
             </form>
             <Footer>
