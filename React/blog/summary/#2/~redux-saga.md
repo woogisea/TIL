@@ -13,6 +13,5 @@
 
 <br>
 
-
 >### post 등록 실패하면
 - history.goBack()으로 뒤로가기
