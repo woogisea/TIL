@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import WriteActionButton from '../../components/write/WriteActionButton';
-import { changeField, writePost } from '../../modules/write';
+import { writePost } from '../../modules/write';
 import { withRouter } from 'react-router-dom';
 
 const WriteActionButtonContainer = ({history}) => {
@@ -28,8 +28,8 @@ const WriteActionButtonContainer = ({history}) => {
 
     useEffect(() => {
         if(post) {
-            const { _id, username } = post;
-            history.push(`/@${username}/${_id}`)
+            const { _id, user } = post;
+            history.push(`/@${user.username}/${_id}`)
         }
 
         if(postError) {
