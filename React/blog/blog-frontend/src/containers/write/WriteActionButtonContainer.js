@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import WriteActionButton from '../../components/write/WriteActionButton';
-import { writePost } from '../../modules/write';
+import { updatePost, writePost } from '../../modules/write';
 import { withRouter } from 'react-router-dom';
 
 const WriteActionButtonContainer = ({history}) => {
     const dispatch = useDispatch();
-    const { title, body, tags, post, postError } = useSelector(({write}) => (
+    const { title, body, tags, post, postError, originalPostId } = useSelector(({write}) => (
         {
             title : write.title,
             body : write.body,
             tags : write.tags,
             post : write.post,
-            postError : write.postError
+            postError : write.postError,
+            originalPostId : write.originalPostId
         }
     ));
 
@@ -21,6 +22,10 @@ const WriteActionButtonContainer = ({history}) => {
     }
 
     const onPublish  = () => {
+        if(originalPostId) {
+            dispatch(updatePost({title, body, tags, id : originalPostId}))
+            return;
+        }
         dispatch(
             writePost({title, body, tags})
         )
@@ -38,7 +43,7 @@ const WriteActionButtonContainer = ({history}) => {
     }, [post, postError, history]);
 
     return (
-        <WriteActionButton onCancle = {onCancle} onPublish = {onPublish}/>
+        <WriteActionButton onCancle = {onCancle} onPublish = {onPublish} isEdit = {originalPostId}/>
     );
 };
 

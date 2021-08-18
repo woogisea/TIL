@@ -23,7 +23,7 @@ const PostContent = styled.div`
     font-size: 1.3125rem;
     color: ${palette.gray[8]};
 `;
-const PostViewer = ({post, error, loading }) => {
+const PostViewer = ({post, error, loading, actionButton }) => {
     if(error) {
         if(error.response && error.response.statue === 404) {
             return <PostViewerBlock>존재 하지 않는 포스트 입니다.</PostViewerBlock>
@@ -42,6 +42,7 @@ const PostViewer = ({post, error, loading }) => {
                 <SubInfo username = {user.username} publishedDate = {publishedDate} hadMarginTop />
                 <Tags tags = {tags} />
             </PostHead>
+            {actionButton}
             <PostContent  dangerouslySetInnerHTML={{ __html: body }}/>
          </PostViewerBlock>
     );
