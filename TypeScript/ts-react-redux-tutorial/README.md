@@ -1,46 +1,94 @@
-# Getting Started with Create React App
+# TypeScript
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 리덕스 사용하기
+```
+$ yarn add redux react-redux @types/react-redux
+//자체적으로 타입스크립트 지원이 되지 않는 react-redux의 경우 @types/를 붙여서 설치
 
-## Available Scripts
+```
+<br>
 
-In the project directory, you can run:
+### 리덕스 모듈
+```js
+//as const를 붙여줌으로써 action.type의 값을 추론 가능하게 해준다.
+const INCREASE = 'counter/INCREASE' as const;
+const DECREASE = 'counter/DECREASE' as const;
+const INCREASE_BY = 'counter/INCREASE_BY' as const;
 
-### `yarn start`
+//액션 객체들에 대한 타입을 준비
+type CounterAction =
+  | ReturnType<typeof increase>
+  | ReturnType<typeof decrease>
+  | ReturnType<typeof increaseBy>;
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+//리듀서에서는 state와 함수의 반환값이 일치하도록 작성
+function counter(
+  state: CounterState = initialState,
+  action: CounterAction
+): CounterState
+```
+<br>
 
-### `yarn test`
+### 컨테이너
+```js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+//루트리듀서의 반환값을 유추해주고 컨테이너에서 사용할수 있게 내보내 주는 과정(index.ts)
+export type RootState = ReturnType<typeof rootReducer>;
 
-### `yarn build`
+//상태를 조회할때는 state의 타입을 RootState로
+const count = useSelector((state: RootState) => state.counter.count);
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+//액션 객체들에 대한 타입을 준비
+type CounterAction =
+  | ReturnType<typeof increase>
+  | ReturnType<typeof decrease>
+  | ReturnType<typeof increaseBy>;
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+//리듀서에서는 state와 함수의 반환값이 일치하도록 작성
+function counter(
+  state: CounterState = initialState,
+  action: CounterAction
+): CounterState
+```
+<br>
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### typesafe-actions
+createStandardAction, createAction, createReducer, ActionType
+```js
+//커스터마이징된 payload를 지원, createAction 사용
+export const addTodo = createAction(ADD_TODO, (text : string) => ({
+    id : nextId++,
+    text
+}))<Todo>();
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export const toggleTodo = createStandardAction(TOGGLE_TODO)<number>();
+export const removeTodo = createStandardAction(REMOVE_TODO)<number>();
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+//모든 액션 타입을 하나로 모아서 준비
+const actions = {
+  addTodo,
+  toggleTodo,
+  removeTodo
+};
+type TodosAction = ActionType<typeof actions>;
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+//createReducer를 통한 reducer 만들기
+const todos = createReducer<TodosState, TodosAction>(initialState, {
+  [ADD_TODO]: (state, action) =>
+    state.concat({
+      ...action.payload, // id, text 를 이 안에 넣기
+      done: false
+    }),
+  // 바구조화 할당을 활용하여 payload 값의 이름을 바꿀 수 있음
+  [TOGGLE_TODO]: (state, { payload: id }) =>
+    state.map(todo => (todo.id === id ? { ...todo, done: !todo.done } : todo)),
+  [REMOVE_TODO]: (state, { payload: id }) =>
+    state.filter(todo => todo.id !== id)
+});
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
