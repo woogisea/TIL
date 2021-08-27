@@ -1,15 +1,13 @@
 import React from 'react';
-import Average from './Average';
-import Counter from './Counter';
-import Info from './Info';
+import User from './UseEffect/User';
 
 const App = () => {
+
+
   return (
-    <>
-      <Counter /> <br />
-      <Info /> <br />
-      <Average />
-    </> 
+    <div>
+      <User />
+    </div>
   );
 };
 
