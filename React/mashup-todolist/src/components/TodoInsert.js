@@ -12,6 +12,15 @@ const TodoInsertBlock = styled.div`
     padding: 2rem;
     border-radius: 10px;
     box-shadow : 2px 2px 2px 2px gray;
+    display: flex;
+
+    button {
+        border: none;
+        outline: none;
+        padding: 0.5rem 1rem;
+        margin-left: 1rem;
+        border-radius: 10px;
+    }
 `;
 
 const StyledInput = styled.input`
@@ -19,16 +28,13 @@ const StyledInput = styled.input`
     border: none;
     border-bottom: 1px solid gray;
     font-size: 1.5rem;
-    width: 100%;
+    
 `;
-const TodoInsert = () => {
-    const [value, setValue] = useState('');
-    const onChange = e => {
-        setValue(e.target.value)
-    };
+const TodoInsert = ({value, onChange, onSubmit}) => {
     return (
         <TodoInsertBlock>
             <StyledInput placeholder = "입력" value = {value} onChange = {onChange} />
+            <button onClick = {() => onSubmit(value)}>입력</button>
         </TodoInsertBlock>
 
     );

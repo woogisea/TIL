@@ -4,6 +4,7 @@ import { DateString, DayName } from '../lib/Date';
 import { AiOutlinePlus } from 'react-icons/ai';
 import TodoInsert from './TodoInsert';
 import { AiOutlineClose } from 'react-icons/ai';
+import TodoInsertContainer from '../container/TodoInsertContainer';
 
 const TodoTempleteBlock = styled.div`
     position: absolute;
@@ -81,7 +82,7 @@ const TodoTemplete = ({children}) => {
     return (
         <>
             {isToggle && (
-                <TodoInsert />
+                <TodoInsertContainer />
             )}
             <TodoTempleteBlock >
                 <WhiteBlock>

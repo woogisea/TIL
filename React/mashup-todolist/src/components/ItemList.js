@@ -6,11 +6,11 @@ const ItemListBlock = styled.div`
     padding: 2rem;
 `;
 
-const ItemList = ({todos, onToggle}) => {
+const ItemList = ({todos, onToggle, onDelete }) => {
     return (
         <ItemListBlock>
             {todos.map(todo => (
-                <Item todo = {todo} key = {todo.id} onToggle = {onToggle}/>
+                <Item todo = {todo} key = {todo.id} onToggle = {onToggle} onDelete = {onDelete} />
             ))}
         </ItemListBlock>
     );

@@ -50,7 +50,7 @@ const ItemBlock = styled.div`
         }
     }
 `;
-const Item = ({todo, onToggle}) => {
+const Item = ({todo, onToggle, onDelete}) => {
     return (
         <ItemBlock>
             <div className="list">
@@ -67,7 +67,7 @@ const Item = ({todo, onToggle}) => {
                         </>
                     )}
                 </div>
-                <BiTrash id = "subicons"/>   
+                <BiTrash id = "subicons" onClick = {() => onDelete(todo.id)} />   
             </div>       
         </ItemBlock>
     );

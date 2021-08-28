@@ -1,16 +1,29 @@
 import React from 'react';
-import TodoNav from './components/TodoNav';
 import TodoTemplete from './components/TodoTemplete';
 import TodoContainer from './container/TodoContainer';
-import TodoNavContainer from './container/TodoNavContainer';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #dfe6e9;
+  }
+
+   html {
+    box-sizing: border-box;
+  }
+
+  * {
+    box-sizing: border-box;
+  } 
+`;
 
 const App = () => {
   return (
     <div>
-      <TodoTemplete>
-        <TodoNavContainer />
-        <TodoContainer />
-      </TodoTemplete>
+      <GlobalStyle />
+        <TodoTemplete>
+          <TodoContainer />
+        </TodoTemplete>
     </div>
   );
 };

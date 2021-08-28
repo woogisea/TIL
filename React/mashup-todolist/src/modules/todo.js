@@ -4,7 +4,7 @@ const TODO_INSERT = 'todo/TODO_INSERT';
 const TODO_TOGGLE = 'todo/TODO_TOGGLE';
 const TODO_REMOVE = 'todo/TODO_REMOVE';
 
-let id = 1;
+let id = 2;
 export const todoInsert = createAction(
     TODO_INSERT, 
     text => (
@@ -36,14 +36,15 @@ const todo = handleActions(
             {
                 ...state,
                 todos : state.todos.concat(todo),
-                count : state.count++
+                count : state.count + 1
 
             }
         ),
         [TODO_TOGGLE] : (state, {payload : id}) => (
             {
                 ...state,
-                todos : state.todos.map(todo => todo.id === id ? {...todo, done : !todo.done} : todo)
+                todos : state.todos.map(todo => todo.id === id ? {...todo, done : !todo.done} : todo),
+                
             }
         ),
 
@@ -51,7 +52,7 @@ const todo = handleActions(
             {
                 ...state,
                 todos : state.todos.filter(todo => todo.id !== id),
-                count : state.count--
+                count : state.count - 1
             }
         )
     },initialState
