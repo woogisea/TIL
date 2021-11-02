@@ -1,31 +1,28 @@
-import React from 'react';
-import TodoTemplete from './components/TodoTemplete';
-import TodoContainer from './container/TodoContainer';
-import { createGlobalStyle } from 'styled-components';
+import React from "react";
+import { createGlobalStyle } from "styled-components";
+import TodoCreate from "./components/TodoCreate";
+import TodoHead from "./components/TodoHead";
+import TodoList from "./components/TodoList";
+import TodoTemplete from "./components/TodoTemplete";
+import { TodoProvider } from "./TodoContext";
 
 const GlobalStyle = createGlobalStyle`
   body {
-    background-color: #dfe6e9;
+    background-color: #e9ecef;
   }
-
-   html {
-    box-sizing: border-box;
-  }
-
-  * {
-    box-sizing: border-box;
-  } 
+  
 `;
-
-const App = () => {
+function App() {
   return (
-    <div>
+    <TodoProvider>
       <GlobalStyle />
-        <TodoTemplete>
-          <TodoContainer />
-        </TodoTemplete>
-    </div>
+      <TodoTemplete>
+        <TodoHead />
+        <TodoList />
+        <TodoCreate />
+      </TodoTemplete>
+    </TodoProvider>
   );
-};
+}
 
 export default App;
