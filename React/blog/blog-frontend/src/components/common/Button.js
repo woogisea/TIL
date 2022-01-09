@@ -1,62 +1,54 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import palette from '../../lib/styles/palette';
 import { Link } from 'react-router-dom';
-
+import palette from '../../lib/styles/palette';
 
 const buttonStyle = css`
-    color: white;
-    background: ${palette.gray[8]};
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 0.25rem 1rem;
-    outline: none;
-    cursor: pointer;
+  background-color: ${palette.gray[8]};
+  &:hover {
+    background-color: ${palette.gray[6]};
+  }
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  color: white;
+  padding: 0.25rem 1rem;
+  font-weight: bold;
+  outline: none;
+  cursor: pointer;
 
-    &:hover {
-        background: ${palette.gray[6]};
-    }
-
-    ${props => 
-        props.fullWidth &&
-        css`
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            width: 100%;
-            font-size: 1.125rem;
+  ${(props) =>
+    props.cyan &&
+    css`
+      background-color: ${palette.cyan[5]};
+      &:hover {
+        background-color: ${palette.cyan[4]};
+      }
     `}
 
-    ${props => 
-        props.cyan &&
-        css`
-            background: ${palette.cyan[5]};
-            &:hover {
-                background: ${palette.cyan[4]};
-            }
+  ${(props) =>
+    props.fullWidth &&
+    css`
+      width: 100%;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+      font-size: 1.125rem;
     `}
-
-    &:disabled {
-        background: ${palette.gray[3]};
-        color : ${palette.gray[5]};
-        cursor: not-allowed;
-    }
-
 `;
+
 const StyledButton = styled.button`
-    ${buttonStyle}
+  ${buttonStyle}
+`;
+const StyledLink = styled(Link)`
+  ${buttonStyle}
 `;
 
-const StyledLink = styled(Link)`
-    ${buttonStyle}
-`;
-const Button = props => {
-    return props.to ? (
-        <StyledLink {...props} cyan = {props.cyan ? 1 : 0} />
-    ) : (
-        <StyledButton {...props} />
-    )
-}
+const Button = (props) => {
+  return props.to ? (
+    <StyledLink {...props} cyan={props.cyan ? 1 : 0} />
+  ) : (
+    <StyledButton {...props} />
+  );
+};
 
 export default Button;
