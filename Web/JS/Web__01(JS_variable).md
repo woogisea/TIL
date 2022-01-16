@@ -1,8 +1,14 @@
 ## Data Types + Variable(변수)
+
 ---
 
-### Variables  (read/write)
-변수를 선언할 수 있는 키워드 : let
+### Variables (read/write)
+
+var 선언을 쓰면 안되는 이유 <br>
+var hoisting : 선언 위치에 상관없이 항상 맨 위로 끌어올림 <br>
+block scope이 없다. <br>
+
+변수를 선언할 수 있는 키워드(ES6) : let <br>
 
 ```JS
 //Global scope (어디에서나 접근 가능)
@@ -14,19 +20,25 @@ let globalName = "Jaewook"
     name = hello
 }
 ```
+
 <br>
 
 ### Constant (read)
-선언과 동시에 할당된 이후에 변경 불가능 : const  <br>
+
+선언과 동시에 할당된 이후에 변경 불가능 : const <br>
 변수의 값이 변할 이유가 없다면 const로 작성하는게 좋다.
+
 ```JS
 const daysInWeek = 7;
 const maxNumber = 5;
 ```
+
 <br>
 
 ### Variables types
+
 Primitve types
+
 ```JS
 const count = 17;
 const size = 17.1;          //값에 상관없이 type : number
@@ -39,7 +51,7 @@ const char = 'c';
 const name = 'Jaewook';
 const plusName = 'hello' + name;           //type : String
 
-console.log(`value : &{name} type : &{typeof plusName}`);   
+console.log(`value : &{name} type : &{typeof plusName}`);
 console.log('value: ' + name + 'type:' + typeof plusName);      // `을 사용하면 "+"를 사용하지 않아도 공백이나 문자열이 그대로 출력
 
 const canRead = true;
@@ -49,18 +61,17 @@ let nothing = null           //null
 
 let x = undefined;          //undefined
 ```
+
 <br>
 
 ### Dynamic typing
+
 변수에 따라서 type이 바뀐다. <br>
 타입이 계속 바뀌기 때문에 나중에 혼란이 올 수 있기 때문에 TypeScript 활용
+
 ```JS
 let text = 'hello';         //String
 text = 1;                   //number
 text = '7' + 5;             //String
 test = '8' / '2';           //number
 ```
-
-
-
-
