@@ -13,3 +13,15 @@
 
     <input type = "text" ref = {InputFocus} />
   ```
+
+  - useRef를 통해서 변수를 관리하면 설정 후 바로 조회가 가능하다(리렌더링이 없음)
+
+  ```JS
+  const nextId = { current : 4};      //함수가 호출될 때마다 변수가 초기화 된다. 즉 항상 4부터 시작
+
+  const nextId = useRef(4);           //함수를 재 호출 하더라도 마지막으로 업데이트한 current값이 유지
+  ```
+
+  ## <br>
+
+- ### map() : 배열안에 있는 각 원소를 변환해서 새로운 배열로 만들어 준다.
