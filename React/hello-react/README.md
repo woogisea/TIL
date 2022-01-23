@@ -24,4 +24,21 @@
 
   ## <br>
 
-- ### map() : 배열안에 있는 각 원소를 변환해서 새로운 배열로 만들어 준다.
+- ### map() : 배열안에 있는 각 원소를 변환해서 새로운 배열로 만들어 준다. <br><br>
+
+- ### useEffect()
+  deps에 특정 값을 넣어서 지정한 값이 바뀔 때에도 호출이 될 수 있음
+
+```JS
+useEffect(() => {
+  effects   //컴포넌트 마운트
+
+  return () => {     //컴포넌트 언마운트
+    clean up
+  }
+},[])
+```
+
+<br>
+
+- ### useMemo() : App.js에서 countActiveUser 함수 참조
