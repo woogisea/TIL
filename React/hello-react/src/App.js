@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useMemo, useReducer } from "react";
 import Counter from "./Counter";
 import CreateUser from "./CreateUser";
 import InputSample from "./InputSample";
@@ -9,68 +9,54 @@ function countActiveUser(user) {
   return user.filter((user) => user.active).length;
 }
 
-function App() {
-  const [users, setUsers] = useState([
+function reducer(state, action) {
+  switch (action.type) {
+    case "CREATE_USER":
+      return {
+        inputs: initialState.inputs,
+        users: state.users.concat(action.user),
+      };
+    case "TOGGLE_USER":
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.id ? { ...user, active: !user.active } : user
+        ),
+      };
+    case "REMOVE_USER":
+      return {
+        ...state,
+        users: state.users.filter((user) => user.id !== action.id),
+      };
+
+    default:
+      return state;
+  }
+}
+
+const initialState = {
+  users: [
     {
       id: 1,
       username: "jaewook",
       email: "aaa@aaa.com",
       active: true,
     },
+
     {
       id: 2,
-      username: "hello",
+      username: "bbb",
       email: "bbb@bbb.com",
       active: false,
     },
-  ]);
+  ],
+};
 
-  const [inputs, setInputs] = useState({
-    username: "",
-    email: "",
-  });
+export const UserDispatch = React.createContext(null);
 
-  const { username, email } = inputs;
-
-  const onChange = (e) => {
-    const { value, name } = e.target;
-
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
-  };
-
-  const nextId = useRef(4);
-
-  const onCreate = () => {
-    const user = {
-      id: nextId.current,
-      username,
-      email,
-      active: false,
-    };
-    setUsers([...users, user]);
-
-    setInputs({
-      username: "",
-      email: "",
-    });
-
-    nextId.current += 1;
-  };
-
-  const onRemove = (id) => {
-    setUsers(users.filter((user) => user.id !== id));
-  };
-
-  const onToggle = (id) => {
-    setUsers(
-      users.map((user) =>
-        user.id === id ? { ...user, active: !user.active } : user
-      )
-    );
-  };
+function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { users } = state;
 
   //const count = countActiveUser(users);
   //countActiveUser가 input를 수정할 때도 호출이 된다 왜? => input를 수정하면 CreateUser에서의 username, email이 바뀌게 된다.
@@ -79,18 +65,13 @@ function App() {
   const count = useMemo(() => countActiveUser(users), [users]);
 
   return (
-    <div>
+    <UserDispatch.Provider value={dispatch}>
       <Counter />
       <InputSample />
-      <CreateUser
-        username={username}
-        email={email}
-        onChange={onChange}
-        onCreate={onCreate}
-      />
-      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
+      <CreateUser />
+      <UserList users={users} />
       <div>활성 사용자 수 : {count} </div>
-    </div>
+    </UserDispatch.Provider>
   );
 }
 
