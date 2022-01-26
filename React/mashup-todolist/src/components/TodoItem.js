@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { MdDone, MdDelete } from "react-icons/md";
+import { useTodoDispatch } from "../TodoProvider";
 
 const TrashBlock = styled.div`
   color: #868e96;
@@ -57,13 +58,18 @@ const Text = styled.div`
       color: #868e96;
     `}
 `;
-function TodoItem({ text, checked }) {
+function TodoItem({ id, text, checked }) {
+  const dispatch = useTodoDispatch();
+  const onToggle = () => dispatch({ type: "TOGGLE", id });
+  const onRemove = () => dispatch({ type: "REMOVE", id });
   return (
     <TodoItemBlock>
-      <CheckBox done={checked}>{checked && <MdDone />}</CheckBox>
+      <CheckBox done={checked} onClick={onToggle}>
+        {checked && <MdDone />}
+      </CheckBox>
       <Text done={checked}>{text}</Text>
       <TrashBlock>
-        <MdDelete />
+        <MdDelete onClick={onRemove} />
       </TrashBlock>
     </TodoItemBlock>
   );
