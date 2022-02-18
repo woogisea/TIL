@@ -1,12 +1,12 @@
 import React from 'react';
-import PostList from '../components/post/PostList';
 import HeaderContainer from '../containers/common/HeaderContainer';
+import PostListContainer from '../containers/post/PostListContainer';
 
 function PostListPage() {
   return (
     <div>
       <HeaderContainer />
-      <PostList />
+      <PostListContainer />
     </div>
   );
 }

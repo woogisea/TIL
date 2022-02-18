@@ -5,6 +5,7 @@ import Button from '../common/Button';
 import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
+import { Link } from 'react-router-dom';
 
 const PostListBlock = styled(Responsive)`
   margin-top: 3rem;
@@ -40,30 +41,43 @@ const PostItemBlock = styled.div`
   }
 `;
 
-function PostItem() {
+function PostItem({ post }) {
+  const { user, publishedDate, tags, title, body, _id } = post;
   return (
     <PostItemBlock>
-      <h2>제목</h2>
-      <SubInfo username="username" publishedDate={new Date()} />
-      <Tags tags={['태그1', '태그2']} />
-      <p>포스트내용</p>
+      <h2>
+        <Link to={`/@${user.username}/${_id}`}>{title}</Link>
+      </h2>
+      <SubInfo
+        username={user.username}
+        publishedDate={new Date(publishedDate)}
+      />
+      <Tags tags={tags} />
+      <p>{body}</p>
     </PostItemBlock>
   );
 }
 
-function PostList() {
+function PostList({ posts, error, loading, showWriteButton }) {
+  if (error) {
+    return <PostItemBlock>에러 발생!</PostItemBlock>;
+  }
   return (
     <PostListBlock>
       <WritePostButtonWrapper>
-        <Button to="/write" cyan>
-          새글 작성하기
-        </Button>
+        {showWriteButton && (
+          <Button to="/write" cyan>
+            새글 작성하기
+          </Button>
+        )}
       </WritePostButtonWrapper>
-      <div>
-        <PostItem />
-        <PostItem />
-        <PostItem />
-      </div>
+      {!loading && posts && (
+        <div>
+          {posts.map((post) => (
+            <PostItem key={post._id} post={post} />
+          ))}
+        </div>
+      )}
     </PostListBlock>
   );
 }
