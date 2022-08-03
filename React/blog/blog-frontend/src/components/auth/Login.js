@@ -61,7 +61,6 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  console.log(errors);
   return (
     <LoginBlock>
       <h3>로그인</h3>

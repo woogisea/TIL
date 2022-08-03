@@ -1,12 +1,16 @@
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginFailure, loginSuccess } from '../../modules/auth';
+import { authSelector, loginFailure, loginSuccess } from '../../modules/auth';
 
 export function useLoginHook() {
-  const { authError } = useSelector(({ auth }) => ({
-    authError: auth.authError,
-  }));
+  // const { authError } = useSelector(({ auth }) => ({
+  //   authError: auth.authError,
+  // }));
+
+  const authError = useSelector(authSelector);
+
+  console.log(authError);
   const dispatch = useDispatch();
 
   async function login(username, password) {

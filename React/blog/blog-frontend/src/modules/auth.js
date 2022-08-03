@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createSelector } from '@reduxjs/toolkit';
 
 const initialState = {
   auth: null,
   authError: null,
+  count: 0,
 };
 
 const authSlice = createSlice({
@@ -28,5 +29,8 @@ const authSlice = createSlice({
 
 export const { registerSuccess, registerFailure, loginSuccess, loginFailure } =
   authSlice.actions;
+
+export const getAuth = (state) => state.auth.authError;
+export const authSelector = createSelector(getAuth, (state) => state);
 
 export default authSlice.reducer;
