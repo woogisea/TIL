@@ -1,33 +1,18 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import AuthForm from '../../components/auth/AuthForm';
-import {
-  changeField,
-  initializeForm,
-  registerFailure,
-  registerSuccess,
-} from '../../modules/auth';
+import Register from '../../components/auth/Register';
+import { registerFailure, registerSuccess } from '../../modules/auth';
 
 function RegisterForm() {
-  const { form } = useSelector(({ auth }) => ({
-    form: auth.register,
+  const { auth } = useSelector(({ auth }) => ({
+    auth: auth.auth,
   }));
   const dispatch = useDispatch();
+  const { reset } = useForm();
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    dispatch(
-      changeField({
-        form: 'register',
-        key: name,
-        value,
-      }),
-    );
-  };
-
-  async function register() {
-    const { username, password } = form;
+  async function register(username, password) {
     try {
       const response = await axios.post('/api/auth/register', {
         username,
@@ -37,27 +22,24 @@ function RegisterForm() {
     } catch (e) {
       dispatch(registerFailure(e));
     }
-    console.log(username, password);
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    register();
+  const onSubmit = (data) => {
+    if (data.password !== data.passwordConfirm) {
+      alert('오류');
+      return;
+    }
+    register(data.username, data.password);
   };
 
   useEffect(() => {
-    dispatch(initializeForm('register'));
-  }, [dispatch]);
+    if (auth) {
+      reset();
+    }
+    reset();
+  }, [auth, reset]);
 
-  return (
-    <AuthForm
-      type="register"
-      form={form}
-      onChange={onChange}
-      onSubmit={onSubmit}
-    />
-  );
+  return <Register onSubmit={onSubmit} />;
 }
 
 export default RegisterForm;

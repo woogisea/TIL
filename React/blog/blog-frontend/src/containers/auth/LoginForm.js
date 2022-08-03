@@ -1,29 +1,17 @@
 import axios from 'axios';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import AuthForm from '../../components/auth/AuthForm';
-import { changeField, loginFailure, loginSuccess } from '../../modules/auth';
+import Login from '../../components/auth/Login';
+import { loginFailure, loginSuccess } from '../../modules/auth';
 
 function LoginForm() {
-  const { form } = useSelector(({ auth }) => ({
-    form: auth.login,
+  const { authError } = useSelector(({ auth }) => ({
+    authError: auth.authError,
   }));
 
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    dispatch(
-      changeField({
-        form: 'login',
-        key: name,
-        value,
-      }),
-    );
-  };
-
-  async function login() {
-    const { username, password } = form;
+  async function login(username, password) {
     try {
       const response = await axios.post('/api/auth/login', {
         username,
@@ -35,19 +23,17 @@ function LoginForm() {
     }
   }
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    login();
+  const onSubmit = (data) => {
+    login(data.username, data.password);
   };
-  return (
-    <AuthForm
-      type="login"
-      onChange={onChange}
-      form={form}
-      onSubmit={onSubmit}
-    />
-  );
+
+  useEffect(() => {
+    if (authError) {
+      alert('아이디와 비밀번호가 일치하지 않습니다.');
+    }
+  }, [authError]);
+
+  return <Login onSubmit={onSubmit} />;
 }
 
 export default LoginForm;
