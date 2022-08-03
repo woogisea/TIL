@@ -1,11 +1,11 @@
 import React from 'react';
 import AuthTemplete from '../components/auth/AuthTemplete';
-import RegisterForm from '../containers/auth/RegisterForm';
+import Register from '../components/auth/Register';
 
 function RegisterPage() {
   return (
     <AuthTemplete>
-      <RegisterForm />
+      <Register />
     </AuthTemplete>
   );
 }

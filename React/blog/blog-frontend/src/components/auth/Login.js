@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import palette from '../../lib/palette';
 import Button from '../common/Button';
 import { useForm } from 'react-hook-form';
+import { useLoginHook } from '../../lib/Hooks/useLoginHook';
 
 const LoginBlock = styled.div`
   h3 {
@@ -52,7 +53,8 @@ const ErrorMessage = styled.div`
   margin-top: 1rem;
 `;
 
-function Login({ onSubmit }) {
+function Login() {
+  const { onSubmit } = useLoginHook();
   const {
     register,
     handleSubmit,

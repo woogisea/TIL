@@ -1,14 +1,12 @@
 import axios from 'axios';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Login from '../../components/auth/Login';
 import { loginFailure, loginSuccess } from '../../modules/auth';
 
-function LoginForm() {
+export function useLoginHook() {
   const { authError } = useSelector(({ auth }) => ({
     authError: auth.authError,
   }));
-
   const dispatch = useDispatch();
 
   async function login(username, password) {
@@ -33,7 +31,5 @@ function LoginForm() {
     }
   }, [authError]);
 
-  return <Login onSubmit={onSubmit} />;
+  return { onSubmit };
 }
-
-export default LoginForm;

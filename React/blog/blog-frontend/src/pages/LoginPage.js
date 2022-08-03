@@ -1,11 +1,11 @@
 import React from 'react';
 import AuthTemplete from '../components/auth/AuthTemplete';
-import LoginForm from '../containers/auth/LoginForm';
+import Login from '../components/auth/Login';
 
 function LoginPage() {
   return (
     <AuthTemplete>
-      <LoginForm />
+      <Login />
     </AuthTemplete>
   );
 }
