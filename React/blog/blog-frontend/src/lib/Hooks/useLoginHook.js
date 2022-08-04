@@ -8,9 +8,9 @@ export function useLoginHook() {
   //   authError: auth.authError,
   // }));
 
-  const authError = useSelector(authSelector);
+  const { authError, count } = useSelector(authSelector);
 
-  console.log(authError);
+  console.log(authError, count);
   const dispatch = useDispatch();
 
   async function login(username, password) {

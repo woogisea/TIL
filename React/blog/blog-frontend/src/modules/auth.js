@@ -30,7 +30,15 @@ const authSlice = createSlice({
 export const { registerSuccess, registerFailure, loginSuccess, loginFailure } =
   authSlice.actions;
 
-export const getAuth = (state) => state.auth.authError;
-export const authSelector = createSelector(getAuth, (state) => state);
+export const getAuthError = (state) => state.auth.authError;
+export const getCount = (state) => state.auth.count;
+export const authSelector = createSelector(
+  getAuthError,
+  getCount,
+  (authError, count) => ({
+    authError,
+    count,
+  }),
+);
 
 export default authSlice.reducer;
